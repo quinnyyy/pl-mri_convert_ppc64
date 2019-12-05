@@ -1,3 +1,4 @@
+# Docker file for mri_convert_ppc64 ChRIS plugin app
 #
 # Build with
 #
@@ -20,20 +21,18 @@
 #   docker run -ti -e HOST_IP=$(ip route | grep -v docker | awk '{if(NF==11) print $9}') --entrypoint /bin/bash local/pl-mri_convert_ppc64
 #
 
-FROM docker.io/quinnyyy/test123:test2
+
+
+FROM fnndsc/ubuntu-python3:latest
 MAINTAINER fnndsc "dev@babymri.org"
 
-ENV FREESURFER_HOME="/freesurferhome"
-ENV SUBJECTS_DIR="/usr/src/mri_convert_ppc64"
 ENV APPROOT="/usr/src/mri_convert_ppc64"
 COPY ["mri_convert_ppc64", "${APPROOT}"]
 COPY ["requirements.txt", "${APPROOT}"]
-COPY ["FreeSurferColorLUT.txt", "/freesurferhome"]
 
 WORKDIR $APPROOT
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-CMD ["python3", "mri_convert_ppc64.py", "--help"]
-
+CMD ["mri_convert_ppc64.py", "--help"]

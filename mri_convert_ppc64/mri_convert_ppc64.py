@@ -20,18 +20,24 @@ from chrisapp.base import ChrisApp
 
 Gstr_title = """
 
-Generate a title from 
-http://patorjk.com/software/taag/#p=display&f=Doom&t=mri_convert_ppc64
+
+                _                                _                         ____    ___ 
+               (_)                              | |                       / ___|  /   |
+ _ __ ___  _ __ _   ___ ___  _ ____   _____ _ __| |_     _ __  _ __   ___/ /___  / /| |
+| '_ ` _ \| '__| | / __/ _ \| '_ \ \ / / _ \ '__| __|   | '_ \| '_ \ / __| ___ \/ /_| |
+| | | | | | |  | || (_| (_) | | | \ V /  __/ |  | |_    | |_) | |_) | (__| \_/ |\___  |
+|_| |_| |_|_|  |_| \___\___/|_| |_|\_/ \___|_|   \__|   | .__/| .__/ \___\_____/    |_/
+               ______                             ______| |   | |                      
+              |______|                           |______|_|   |_|                      
+                                                                                       
+                                                                                       
+                                                                                       
+                                                                                       
 
 """
 
 Gstr_synopsis = """
 
-(Edit this in-line help for app specifics. At a minimum, the 
-flags below are supported -- in the case of DS apps, both
-positional arguments <inputDir> and <outputDir>; for FS apps
-only <outputDir> -- and similarly for <in> <out> directories
-where necessary.)
 
     NAME
 
@@ -47,10 +53,10 @@ where necessary.)
             [--savejson <DIR>]                                          \\
             [-v <level>] [--verbosity <level>]                          \\
             [--version]                                                 \\
-	    [--inputFile <inputFile>]					\\
-	    [--outputFile <outputFile>]					\\
-	    [--executable <executable>]					\\
-	    [--execArgs <execArgs>]					\\
+            [--inputFile <inputFile>]                                   \\
+            [--outputFile <outputFile>]                                 \\
+            [--executable <executable>]                                 \\
+            [--execArgs <execArgs>]                                     \\
             <inputDir>                                                  \\
             <outputDir> 
 
@@ -65,22 +71,22 @@ where necessary.)
     DESCRIPTION
 
         `mri_convert_ppc64.py` calls an underlying executable 
-	(typically 'mri_convert') and passes it an input and output spec.
+        (typically 'mri_convert') and passes it an input and output spec.
 
     ARGS
 
-	[--inputFile <inputFile>]				
-	The input file, relative to <inputDir>.
+        [--inputFile <inputFile>]                               
+        The input file, relative to <inputDir>.
 
-	[--outputFile <outputFile>]	
-	The output file, relative to <outpufDir>.				
+        [--outputFile <outputFile>]     
+        The output file, relative to <outpufDir>.                               
 
-	[--executable <executable>]		
-	The actual executable to run.			
+        [--executable <executable>]             
+        The actual executable to run.                   
 
-	[--execArgs <execArgs>]	
-	Additional executable-specific command line args.
-				
+        [--execArgs <execArgs>] 
+        Additional executable-specific command line args.
+                                
         [-h] [--help]
         If specified, show help message and exit.
         
@@ -150,28 +156,28 @@ class Mri_convert_ppc64(ChrisApp):
         """
 
         self.add_argument('--executable', 
-                           dest         = 'executable' 
+                           dest         = 'executable',
                            type         = str, 
                            optional     = True,
                            help         = 'the conversion program to use',
                            default      = '/usr/bin/mri_convert')
 
         self.add_argument('--inputFile', 
-                           dest         = 'inputFile' 
+                           dest         = 'inputFile', 
                            type         = str, 
                            optional     = True,
                            help         = 'the input file',
                            default      = '')
 
         self.add_argument('--outputFile', 
-                           dest         = 'outputFile' 
+                           dest         = 'outputFile', 
                            type         = str, 
                            optional     = True,
                            help         = 'the output file',
                            default      = '')
 
-        self.add_argument('--execArgs' 
-                           dest         = 'execArgs' 
+        self.add_argument('--execArgs',
+                           dest         = 'execArgs',
                            type         = str, 
                            optional     = True,
                            help         = 'additonal arguments for the chosen executable',
@@ -191,18 +197,19 @@ class Mri_convert_ppc64(ChrisApp):
                 print("You must specicy an output file relative to the output directory.")
                 sys.exit(1)
 
-        str_cmd = '%s %s %s/%s %s/%s' % ( 	options.executable, 
-						options.execArgs,
-						options.inputdir, 
-						options.inputFile, 
-						options.outputdir, 
-						options.outputFile)
+        str_cmd = '%s %s %s/%s %s/%s' % (       options.executable, 
+                                                options.execArgs,
+                                                options.inputdir, 
+                                                options.inputFile, 
+                                                options.outputdir, 
+                                                options.outputFile)
         os.system(str_cmd)
 
     def show_man_page(self):
         """
         Print the app's man page.
         """
+        print(Gstr_title)
         print(Gstr_synopsis)
 
 
