@@ -20,7 +20,8 @@
 #   docker run -ti -e HOST_IP=$(ip route | grep -v docker | awk '{if(NF==11) print $9}') --entrypoint /bin/bash local/pl-mri_convert_ppc64
 #
 
-FROM docker.io/quinnyyy/test123:test2
+#FROM docker.io/quinnyyy/test123:test2
+FROM docker.io/quinnyyy/centos_python_ppc_base:firsttry
 MAINTAINER fnndsc "dev@babymri.org"
 
 ENV FREESURFER_HOME="/freesurferhome"
@@ -35,5 +36,5 @@ WORKDIR $APPROOT
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-CMD ["python3", "mri_convert_ppc64.py", "--help"]
+CMD ["mri_convert_ppc64.py", "--help"]
 
